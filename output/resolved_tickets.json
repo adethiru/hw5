@@ -1,0 +1,647 @@
+{
+  "generated_at": "2026-10-11T22:02:54",
+  "model": "gpt-6-luna",
+  "starting_checking_balance": 3400.0,
+  "ending_checking_balance": 152.0,
+  "cash_reconciles_with_cash_accounts": true,
+  "tickets": [
+    {
+      "id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "final_status": "resolved",
+      "outcome": "Resolved the team's work: size S has no stock (shortfall 1). Pending request #1 pays the blocking overdue invoice to Bulldog Print Co; pending request #2 is a prepaid PO for one unit. Human should approve and execute #1 before approving #2. Combined outflow is $848.00, leaving $2,552.00; this covers the $2,400.00 rent due 2026-09-02, with $152.00 remaining. Customer draft 1 says restock is being arranged and gives 2026-09-05 only as a conditional earliest estimate after approvals and supplier shipment. No payment, PO execution, or message sending has occurred.",
+      "run_id": "10579a0268",
+      "agents": [
+        {
+          "agent": "boss",
+          "steps": 7,
+          "asked_by": [],
+          "delegated_to": [
+            "inventory",
+            "accounting",
+            "customer_service"
+          ],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_cash_position": 1,
+            "update_ticket": 1
+          },
+          "contribution": "Resolved the team's work: size S has no stock (shortfall 1). Pending request #1 pays the blocking overdue invoice to Bulldog Print Co; pending request #2 is a prepaid PO for one unit. Human should approve and execute #1 before approving #2. Combined outflow is $848.00, leaving $2,552.00; this covers the $2,400.00 rent due 2026-09-02, with $152.00 remaining. Customer draft 1 says restock is being arranged and gives 2026-09-05 only as a conditional earliest estimate after approvals and supplier shipment. No payment, PO execution, or message sending has occurred.",
+          "recommendation": null,
+          "approval_request_ids": [
+            1,
+            2
+          ],
+          "draft_ids": [
+            1
+          ]
+        },
+        {
+          "agent": "inventory",
+          "steps": 2,
+          "asked_by": [
+            "boss"
+          ],
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "check_inventory_stock": 1,
+            "check_vendor_status": 1
+          },
+          "contribution": "Checked ticket 101, size S stock, and vendor 1 status. There is no stock to fill the order; the minimum restock is 1 unit. Bulldog Print Co will not ship while invoice 501 remains open.",
+          "recommendation": "Recommend a minimum restock of 1 unit of CC-TEE-WHITE size S from vendor 1, Bulldog Print Co. Invoice 501 must be paid first; earliest arrival is 2026-09-05 if ordered today and the invoice is paid so shipment can proceed. Accounting should handle the payment and purchase-order request; no PO has been filed by Inventory.",
+          "approval_request_ids": [],
+          "draft_ids": []
+        },
+        {
+          "agent": "accounting",
+          "steps": 4,
+          "asked_by": [
+            "boss"
+          ],
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_cash_position": 1,
+            "list_approval_requests": 2,
+            "get_pricing_and_margin": 1,
+            "request_payment_approval": 1,
+            "request_purchase_order_approval": 1
+          },
+          "contribution": "Filed pending approval request 1 to pay overdue invoice 501 to Bulldog Print Co for $840.00, and pending prepaid PO request 2 for one CC-TEE-WHITE size S at $8.00. The combined requested cash outflow is $848.00, leaving $2,552.00 from checking's $3,400.00; no money moved and neither request is executed.",
+          "recommendation": "Human approval order: first approve and execute payment request 1 to clear the overdue vendor invoice; then approve the one-unit prepaid PO request 2. The requests together leave $2,552.00 in checking, which covers the $2,400.00 rent due 2026-09-02, leaving $152.00 if all three outflows are approved and executed; the vendor will not ship until invoice 501 is cleared.",
+          "approval_request_ids": [
+            1,
+            2
+          ],
+          "draft_ids": []
+        },
+        {
+          "agent": "customer_service",
+          "steps": 3,
+          "asked_by": [
+            "boss"
+          ],
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "list_customer_drafts": 1,
+            "save_customer_draft": 1
+          },
+          "contribution": "Saved a customer message draft for Tauhid Zaman stating we are arranging a restock and will confirm a date. It gives 2026-09-05 only as a conditional earliest estimate dependent on approvals and supplier shipment; it does not promise availability or a confirmed date.",
+          "recommendation": "Have a human review the draft before sending; no message has been sent.",
+          "approval_request_ids": [],
+          "draft_ids": [
+            1
+          ]
+        }
+      ],
+      "delegations": [
+        {
+          "from": "boss",
+          "to": "inventory"
+        },
+        {
+          "from": "boss",
+          "to": "accounting"
+        },
+        {
+          "from": "boss",
+          "to": "customer_service"
+        }
+      ],
+      "human_approvals": [
+        {
+          "request_id": 1,
+          "kind": "payment",
+          "amount": 840.0,
+          "status": "executed",
+          "decided_by": "Ade Thiruchandran",
+          "decided_at": "2026-10-12T01:56:56+00:00",
+          "payment_id": 1
+        },
+        {
+          "request_id": 2,
+          "kind": "purchase_order",
+          "amount": 8.0,
+          "status": "executed",
+          "decided_by": "Ade Thiruchandran",
+          "decided_at": "2026-10-12T01:57:00+00:00",
+          "payment_id": 2
+        }
+      ],
+      "cash_change": -848.0,
+      "customer_drafts": [
+        {
+          "id": 1,
+          "recipient": "Tauhid Zaman",
+          "subject": "Update on your Bulldog tee",
+          "status": "draft"
+        }
+      ],
+      "usage": {
+        "requests": 16,
+        "tool_calls": 18,
+        "input_tokens": 71283,
+        "output_tokens": 3010,
+        "request_tokens": 71283,
+        "response_tokens": 3010,
+        "total_tokens": 74293
+      },
+      "evaluation": {
+        "score": "12/12",
+        "checks": [
+          {
+            "check": "Routing: Boss called the planned specialist first",
+            "passed": true,
+            "detail": "planned Inventory, actual Inventory"
+          },
+          {
+            "check": "Efficiency: no agent the plan said should sit out",
+            "passed": true,
+            "detail": "extra: none"
+          },
+          {
+            "check": "Coverage: every planned specialist worked",
+            "passed": true,
+            "detail": "missing: none"
+          },
+          {
+            "check": "Hand-offs within plan (+1 tolerance): 3 vs 3",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "No refused delegations or errors",
+            "passed": true,
+            "detail": "0 refused, 0 errors"
+          },
+          {
+            "check": "Write tools used only by the right role",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "Only gpt-6-luna responded",
+            "passed": true,
+            "detail": "gpt-6-luna-2026-09-22"
+          },
+          {
+            "check": "Ticket ended resolved",
+            "passed": true,
+            "detail": "status = resolved"
+          },
+          {
+            "check": "Payment request for invoice 501 at $840.00 (from DB)",
+            "passed": true,
+            "detail": "1 filed"
+          },
+          {
+            "check": "PO for CC-TEE-WHITE size S from Bulldog Print Co (vendor 1)",
+            "passed": true,
+            "detail": "1 filed"
+          },
+          {
+            "check": "Customer draft to Tauhid Zaman",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "No price override (not asked for)",
+            "passed": true,
+            "detail": ""
+          }
+        ],
+        "actual_vs_expected": [
+          "Routing matched the plan: the Boss went to Inventory first.",
+          "Tools used that the plan didn't predict: get_pricing_and_margin.",
+          "Cash effect after human approvals: -$848.00 (see the Cash tab)."
+        ]
+      }
+    },
+    {
+      "id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "final_status": "resolved",
+      "outcome": "The notice matches lease 1: $2400.0 rent is due 2026-09-02, in 2 days, and is not overdue. Rent payment request 3 is filed and awaits human approval. Prioritize this due-soon rent; the separate overdue invoice 501 for $840.0 remains open. Projected cash after all queued payments, including rent, is $152.0. No customer draft is needed.",
+      "run_id": "06fe59abf4",
+      "agents": [
+        {
+          "agent": "boss",
+          "steps": 5,
+          "asked_by": [],
+          "delegated_to": [
+            "facilities"
+          ],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_cash_position": 1,
+            "list_approval_requests": 1,
+            "update_ticket": 1
+          },
+          "contribution": "The notice matches lease 1: $2400.0 rent is due 2026-09-02, in 2 days, and is not overdue. Rent payment request 3 is filed and awaits human approval. Prioritize this due-soon rent; the separate overdue invoice 501 for $840.0 remains open. Projected cash after all queued payments, including rent, is $152.0. No customer draft is needed.",
+          "recommendation": null,
+          "approval_request_ids": [
+            3
+          ],
+          "draft_ids": []
+        },
+        {
+          "agent": "facilities",
+          "steps": 3,
+          "asked_by": [
+            "boss"
+          ],
+          "delegated_to": [
+            "accounting"
+          ],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_lease_rent_status": 1,
+            "get_cash_position": 1
+          },
+          "contribution": "Verified ticket 102 against lease 1: the requester/landlord is Elm City Properties, and the notice saying rent is due in 2 days matches the database as of shop_today 2026-08-31. Rent is due 2026-09-02 and is not overdue; accounting filed rent payment request 3 for human approval. Rent is a fixed obligation; late payment risks fees or the space, and no specific penalty amount is known.",
+          "recommendation": "Accounting has filed payment request 3; the human owner must approve it. Rent alone is covered, but rent plus all currently queued commitments leaves a projected $152.0, so account for the overdue invoice separately. After rent is paid, next_due should move forward one month.",
+          "approval_request_ids": [
+            3
+          ],
+          "draft_ids": []
+        },
+        {
+          "agent": "accounting",
+          "steps": 4,
+          "asked_by": [
+            "facilities"
+          ],
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_cash_position": 1,
+            "get_lease_rent_status": 1,
+            "list_approval_requests": 1,
+            "request_payment_approval": 1
+          },
+          "contribution": "Filed pending rent payment request 3 for lease 1's DB rent amount of $2400.0, due 2026-09-02. Checking covers the rent on its own, and after all currently queued payments plus this rent, the projected balance is $152.0; no money has moved.",
+          "recommendation": "Human approval is required. Prioritize the rent, which is due within 7 days; consider the separate overdue invoice 501 as another operating obligation. The rent request is pending and combined queued commitments leave $152.0 projected checking balance.",
+          "approval_request_ids": [
+            3
+          ],
+          "draft_ids": []
+        }
+      ],
+      "delegations": [
+        {
+          "from": "boss",
+          "to": "facilities"
+        },
+        {
+          "from": "facilities",
+          "to": "accounting"
+        }
+      ],
+      "human_approvals": [
+        {
+          "request_id": 3,
+          "kind": "payment",
+          "amount": 2400.0,
+          "status": "executed",
+          "decided_by": "Ade Thiruchandran",
+          "decided_at": "2026-10-12T01:57:01+00:00",
+          "payment_id": 3
+        }
+      ],
+      "cash_change": -2400.0,
+      "customer_drafts": [],
+      "usage": {
+        "requests": 12,
+        "tool_calls": 13,
+        "input_tokens": 50637,
+        "output_tokens": 1944,
+        "request_tokens": 50637,
+        "response_tokens": 1944,
+        "total_tokens": 52581
+      },
+      "evaluation": {
+        "score": "11/11",
+        "checks": [
+          {
+            "check": "Routing: Boss called the planned specialist first",
+            "passed": true,
+            "detail": "planned Facilities, actual Facilities"
+          },
+          {
+            "check": "Efficiency: no agent the plan said should sit out",
+            "passed": true,
+            "detail": "extra: none"
+          },
+          {
+            "check": "Coverage: every planned specialist worked",
+            "passed": true,
+            "detail": "missing: none"
+          },
+          {
+            "check": "Hand-offs within plan (+1 tolerance): 2 vs 2",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "No refused delegations or errors",
+            "passed": true,
+            "detail": "0 refused, 0 errors"
+          },
+          {
+            "check": "Write tools used only by the right role",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "Only gpt-6-luna responded",
+            "passed": true,
+            "detail": "gpt-6-luna-2026-09-22"
+          },
+          {
+            "check": "Ticket ended resolved",
+            "passed": true,
+            "detail": "status = resolved"
+          },
+          {
+            "check": "Rent payment request for lease 1 at $2,400.00 (from DB)",
+            "passed": true,
+            "detail": "1 filed"
+          },
+          {
+            "check": "No customer draft (requester is the landlord)",
+            "passed": true,
+            "detail": "0 drafts"
+          },
+          {
+            "check": "No purchase order (no stock involved)",
+            "passed": true,
+            "detail": ""
+          }
+        ],
+        "actual_vs_expected": [
+          "Routing matched the plan: the Boss went to Facilities first.",
+          "Cash effect after human approvals: -$2,400.00 (see the Cash tab)."
+        ]
+      }
+    },
+    {
+      "id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "final_status": "resolved",
+      "outcome": "Resolved the team work: price override request 4 proposes $49.30 per hoodie ($986.00 for 20) and is pending human approval; customer draft 2 is saved for review. Stock is 8 of 20, leaving 12 short. Bulldog Print Co cannot ship while overdue invoice 501 remains open, and no PO was filed. Cash after existing pending payments is $152.00, so do not approve an invoice payment plus a prepaid PO on this cash picture; prioritize existing commitments. Any arrival estimate of 2026-09-05 is conditional and not a firm promise.",
+      "run_id": "39dd252d30",
+      "agents": [
+        {
+          "agent": "boss",
+          "steps": 6,
+          "asked_by": [],
+          "delegated_to": [
+            "inventory",
+            "accounting",
+            "customer_service"
+          ],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "get_cash_position": 2,
+            "update_ticket": 1
+          },
+          "contribution": "Resolved the team work: price override request 4 proposes $49.30 per hoodie ($986.00 for 20) and is pending human approval; customer draft 2 is saved for review. Stock is 8 of 20, leaving 12 short. Bulldog Print Co cannot ship while overdue invoice 501 remains open, and no PO was filed. Cash after existing pending payments is $152.00, so do not approve an invoice payment plus a prepaid PO on this cash picture; prioritize existing commitments. Any arrival estimate of 2026-09-05 is conditional and not a firm promise.",
+          "recommendation": null,
+          "approval_request_ids": [
+            4
+          ],
+          "draft_ids": [
+            2
+          ]
+        },
+        {
+          "agent": "inventory",
+          "steps": 4,
+          "asked_by": [
+            "boss",
+            "accounting"
+          ],
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 2,
+            "check_inventory_stock": 2,
+            "check_vendor_status": 2,
+            "list_approval_requests": 1
+          },
+          "contribution": "Checked ticket 103\u2019s size-M hoodie stock: 8 are on hand against 20 requested, leaving a shortfall of 12; stock is in Aisle A. The suitable supplier by specialty is Bulldog Print Co (vendor 1, apparel reprint), but it is not eligible to ship because invoice 501 is open and overdue; lead time is 5 days and the listed earliest arrival is 2026-09-05, reachable only after the invoice is paid. No approval/PO requests are listed for this ticket.",
+          "recommendation": "Coordinate a PO for the minimum shortfall of 12 units from Bulldog Print Co (vendor 1) only after the human approves payment of open invoice 501; earliest arrival is 2026-09-05 if that prerequisite is met. No duplicate PO request was filed.",
+          "approval_request_ids": [],
+          "draft_ids": []
+        },
+        {
+          "agent": "accounting",
+          "steps": 5,
+          "asked_by": [
+            "boss"
+          ],
+          "delegated_to": [
+            "inventory"
+          ],
+          "mcp_tools": {
+            "get_cash_position": 1,
+            "get_ticket": 1,
+            "list_approval_requests": 1,
+            "get_pricing_and_margin": 1,
+            "request_price_override_approval": 1
+          },
+          "contribution": "Filed a pending price-override request for $49.30 per unit, the maximum 15% discount from list; verified margin is 55.4% and price remains above cost. Inventory reports 8 on hand and a 12-unit shortfall; Bulldog Print Co cannot ship while overdue invoice 501 remains open, so no PO was filed.",
+          "recommendation": "Human to review price-override request 4. For fulfillment, prioritize invoice 501 payment approval as the prerequisite before considering a PO for the 12-unit shortfall; arrival 2026-09-05 is conditional on the vendor becoming eligible. No PO request was filed, and expected sales are not included in cash.",
+          "approval_request_ids": [
+            4
+          ],
+          "draft_ids": []
+        },
+        {
+          "agent": "customer_service",
+          "steps": 3,
+          "asked_by": [
+            "boss"
+          ],
+          "delegated_to": [],
+          "mcp_tools": {
+            "get_ticket": 1,
+            "list_customer_drafts": 1,
+            "list_approval_requests": 1,
+            "save_customer_draft": 1
+          },
+          "contribution": "Saved a customer draft explaining that the proposed order price of $49.30 per hoodie, $986.00 total, is pending manager approval. It states that 8 units are available now and the remaining 12 depend on a restock that has no firm date, and offers the customer a choice to split the delivery or wait for all 20.",
+          "recommendation": "Human review the customer draft and the pending price override request before any message or price commitment.",
+          "approval_request_ids": [
+            4
+          ],
+          "draft_ids": [
+            2
+          ]
+        }
+      ],
+      "delegations": [
+        {
+          "from": "boss",
+          "to": "inventory"
+        },
+        {
+          "from": "boss",
+          "to": "accounting"
+        },
+        {
+          "from": "accounting",
+          "to": "inventory"
+        },
+        {
+          "from": "boss",
+          "to": "customer_service"
+        }
+      ],
+      "human_approvals": [
+        {
+          "request_id": 4,
+          "kind": "price_override",
+          "amount": 986.0,
+          "status": "approved",
+          "decided_by": "Ade Thiruchandran",
+          "decided_at": "2026-10-12T01:57:05+00:00",
+          "payment_id": null
+        }
+      ],
+      "cash_change": 0,
+      "customer_drafts": [
+        {
+          "id": 2,
+          "recipient": "Yale AI Club",
+          "subject": "Bulk hoodie request",
+          "status": "draft"
+        }
+      ],
+      "usage": {
+        "requests": 18,
+        "tool_calls": 24,
+        "input_tokens": 78933,
+        "output_tokens": 3599,
+        "request_tokens": 78933,
+        "response_tokens": 3599,
+        "total_tokens": 82532
+      },
+      "evaluation": {
+        "score": "12/13",
+        "checks": [
+          {
+            "check": "Routing: Boss called the planned specialist first",
+            "passed": true,
+            "detail": "planned Inventory, actual Inventory"
+          },
+          {
+            "check": "Efficiency: no agent the plan said should sit out",
+            "passed": true,
+            "detail": "extra: none"
+          },
+          {
+            "check": "Coverage: every planned specialist worked",
+            "passed": true,
+            "detail": "missing: none"
+          },
+          {
+            "check": "Hand-offs within plan (+1 tolerance): 4 vs 3",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "No refused delegations or errors",
+            "passed": true,
+            "detail": "0 refused, 0 errors"
+          },
+          {
+            "check": "Write tools used only by the right role",
+            "passed": true,
+            "detail": ""
+          },
+          {
+            "check": "Only gpt-6-luna responded",
+            "passed": true,
+            "detail": "gpt-6-luna-2026-09-22"
+          },
+          {
+            "check": "Ticket ended resolved",
+            "passed": true,
+            "detail": "status = resolved"
+          },
+          {
+            "check": "Price override filed",
+            "passed": true,
+            "detail": "1 filed"
+          },
+          {
+            "check": "Proposed price within policy ($49.30-$58.00: <=15% off, above $22 cost)",
+            "passed": true,
+            "detail": "$49.3"
+          },
+          {
+            "check": "PO for the 12-unit CC-HOOD-NAVY M shortfall",
+            "passed": false,
+            "detail": "none"
+          },
+          {
+            "check": "Did not duplicate the invoice 501 payment",
+            "passed": true,
+            "detail": "1 requests for 501 overall"
+          },
+          {
+            "check": "Customer draft to Yale AI Club",
+            "passed": true,
+            "detail": ""
+          }
+        ],
+        "actual_vs_expected": [
+          "Routing matched the plan: the Boss went to Inventory first.",
+          "Planned tools that were never called: request_purchase_order_approval.",
+          "Cash effect after human approvals: $0.00 (see the Cash tab)."
+        ]
+      }
+    }
+  ],
+  "cash_ledger": [
+    {
+      "payment_id": 1,
+      "ticket_id": 101,
+      "approval_request_id": 1,
+      "kind": "invoice",
+      "description": "Paid invoice #501 to Bulldog Print Co (Rush reprint CC-TEE-WHITE S)",
+      "amount": 840.0,
+      "approved_by": "Ade Thiruchandran",
+      "paid_at": "2026-08-31",
+      "balance_before": 3400.0,
+      "balance_after": 2560.0
+    },
+    {
+      "payment_id": 2,
+      "ticket_id": 101,
+      "approval_request_id": 2,
+      "kind": "purchase_order",
+      "description": "Prepaid purchase order (request #2): 1 \u00d7 CC-TEE-WHITE S from Bulldog Print Co at $8.00",
+      "amount": 8.0,
+      "approved_by": "Ade Thiruchandran",
+      "paid_at": "2026-08-31",
+      "balance_before": 2560.0,
+      "balance_after": 2552.0
+    },
+    {
+      "payment_id": 3,
+      "ticket_id": 102,
+      "approval_request_id": 3,
+      "kind": "rent",
+      "description": "Paid rent on lease #1 to Elm City Properties (was due 2026-09-02)",
+      "amount": 2400.0,
+      "approved_by": "Ade Thiruchandran",
+      "paid_at": "2026-08-31",
+      "balance_before": 2552.0,
+      "balance_after": 152.0
+    }
+  ]
+}
