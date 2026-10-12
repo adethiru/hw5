@@ -1,0 +1,17 @@
+# secrets
+.env
+# python
+.venv/
+__pycache__/
+*.pyc
+# node
+node_modules/
+frontend/dist/
+# os / local
+.DS_Store
+*.tmp
+output/*.corrupt-*.json
+# stray copy of the DB outside data/ (the real ones live in data/ and ARE committed)
+/campus_customs.db
+# upload staging folder
+upload to GitHub/
