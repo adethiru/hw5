@@ -1,0 +1,107 @@
+{
+  "client": "MCP Python SDK stdio client (mcp_server/smoke_test.py) - fallback because Claude Code was not available",
+  "mcp_server": "campus-customs (campus-customs)",
+  "connection": "stdio: .venv/bin/python mcp_server/server.py (same command as .mcp.json)",
+  "database": "data/campus_customs_new.db",
+  "ran_at": "2026-10-12T02:06:50+00:00",
+  "tools_listed": [
+    "check_inventory_stock",
+    "check_vendor_status",
+    "decide_approval_request",
+    "execute_approved_payment",
+    "get_cash_position",
+    "get_lease_rent_status",
+    "get_pricing_and_margin",
+    "get_ticket",
+    "list_approval_requests",
+    "list_customer_drafts",
+    "list_tickets",
+    "place_approved_purchase_order",
+    "request_payment_approval",
+    "request_price_override_approval",
+    "request_purchase_order_approval",
+    "save_customer_draft",
+    "update_ticket"
+  ],
+  "tests": [
+    {
+      "prompt": "How many CC-HOOD-NAVY size M hoodies are on hand for ticket 103, which needs 20?",
+      "tool": "check_inventory_stock",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "size": "M",
+        "qty_needed": 20
+      },
+      "is_error": false,
+      "tool_output": {
+        "found": true,
+        "items": [
+          {
+            "sku": "CC-HOOD-NAVY",
+            "name": "Basic Hoodie Big Yale",
+            "size": "M",
+            "qty": 8,
+            "location": "Aisle A"
+          }
+        ],
+        "qty_needed": 20,
+        "on_hand": 8,
+        "shortfall": 12,
+        "can_fill_from_stock": false
+      }
+    },
+    {
+      "prompt": "What is Bulldog Print Co (vendor 1) status - lead time, open invoices, will it ship?",
+      "tool": "check_vendor_status",
+      "arguments": {
+        "vendor_id": 1
+      },
+      "is_error": false,
+      "tool_output": {
+        "found": true,
+        "shop_today": "2026-08-31",
+        "vendors": [
+          {
+            "vendor_id": 1,
+            "name": "Bulldog Print Co",
+            "specialty": "apparel reprint",
+            "lead_days": 5,
+            "open_invoices": [],
+            "total_open_amount": 0,
+            "will_ship_new_product": true,
+            "earliest_arrival_if_ordered_today": "2026-09-05"
+          }
+        ]
+      }
+    },
+    {
+      "prompt": "What rent is due on lease 1 for ticket 102?",
+      "tool": "get_lease_rent_status",
+      "arguments": {
+        "lease_id": 1
+      },
+      "is_error": false,
+      "tool_output": {
+        "found": true,
+        "shop_today": "2026-08-31",
+        "lease_id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-10-02",
+        "days_until_due": 32,
+        "is_overdue": false,
+        "notes": null,
+        "cash_accounts": [
+          {
+            "account": "checking",
+            "balance": 152.0,
+            "as_of": "2026-08-31",
+            "covers_rent": false,
+            "balance_after_rent": -2248.0
+          }
+        ]
+      }
+    }
+  ]
+}
